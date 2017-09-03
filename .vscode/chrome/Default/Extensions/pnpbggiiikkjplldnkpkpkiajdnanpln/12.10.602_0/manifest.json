@@ -1,0 +1,22 @@
+{
+   "background": {
+      "page": "background.htm"
+   },
+   "content_scripts": [ {
+      "all_frames": false,
+      "js": [ "iocm.js", "contentscript.js" ],
+      "matches": [ "\u003Call_urls>" ],
+      "run_at": "document_idle"
+   } ],
+   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+   "description": "Chrome extension by SmartBear for functional testing of web pages.",
+   "icons": {
+      "128": "icon128.png",
+      "48": "icon48.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1qNu6hBQuUfcKR8tPi9d81+MjfCrdrJh/DhGXeJOlZU+EgMMk2LkN75Ex/GvfIwc+gNrrR1Ob1IMZhFwW/crzzUHqhS9aqncA5hiVGT7uZ+NG1j30G70RwPKcMBxJlwlnZ6KBy/o6KhfDsdKTG7IgivdjAoHAl/14LgyAodwEM/L716RHGHYrdbzClp1y9fxA+xkptQ75OdWnRB5huHVo6qRVPOPG4PTUAjQ/GmYD41ZFYXvMGAiw6cJUMq8p0v0DfES/G+LV3t9dyBpL+C3Eayy6Y1oMtDciBIy7FgyGEYlOw0GQXegi0Q6tpPyVAalDMIqwYCkGmYFP1bqDdbUjQIDAQAB",
+   "manifest_version": 2,
+   "name": "SmartBear Test Extension",
+   "permissions": [ "tabs", "nativeMessaging", "debugger", "\u003Call_urls>" ],
+   "version": "12.10.602"
+}
