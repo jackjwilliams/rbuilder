@@ -12,7 +12,7 @@ const req = {
 }
 
 const NPCS = {
-  all: () => axios.get(u('/api/admin/npcs'))
+  all: () => req.get('/api/admin/npcs')
 }
 
 export default {

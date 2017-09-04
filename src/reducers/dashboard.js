@@ -6,7 +6,8 @@ const initalState = {
     count: 1,
     page: 1,
     filter: '',
-    error: ''
+    error: '',
+    loading: false
   },
   players: {
     list: [],
@@ -40,18 +41,27 @@ const dashboard = (state = initalState, action) => {
         npcs: {
           ...state.npcs,
           list: action.payload,
-          count: action.payload.length
+          count: action.payload.length,
+          loading: false
         }
       }
-    case a.NPCS_LOAD_FAILURE: {
+    case a.NPCS_LOAD_FAILURE: 
       return {
         ...state,
         npcs: {
           ...state.npcs,
-          error: action.error.message
+          error: action.error.message,
+          loading: false
         }
       }
-    }
+    case a.NPCS_LOAD:
+      return {
+        ...state,
+        npcs: {
+          ...state.npcs,
+          loading: true
+        }
+      }
     default:
       return state;
   }

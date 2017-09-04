@@ -1,18 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import Root from './containers/Root';
 
-import App from './App';
 import './index.css';
 import '../node_modules/grommet-css'
 
-import store from './store';
+import { configureStore, history } from './store/configureStore';
+
+const store = configureStore();
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App/>
-  </Provider>,
+  <Root store={store} history={history}/>,
   document.getElementById('root')
 );

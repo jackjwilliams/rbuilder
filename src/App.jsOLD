@@ -7,7 +7,10 @@ import { loadNpcs } from './actions/dashboard';
 import { default as GrommetApp } from 'grommet/components/App'
 // import Headline from 'grommet/components/Headline'
 // import Image from 'grommet/components/Image'
-import { Headline, Image, List, ListItem } from 'grommet';
+import { Headline, Image, List, ListItem, Header, Title, Box, Menu, Anchor } from 'grommet';
+import { Header } from './components/Header';
+import { NavLink } from 'react-router-dom';
+import Spinning from 'grommet/components/icons/Spinning';
 
 class App extends Component {
 
@@ -17,17 +20,20 @@ class App extends Component {
 
   render() {
     let npcs = this.props.npcs.list.map(npc => {
-      return <ListItem key={npc.name}>{npc.name}</ListItem>
+      return <ListItem key={npc.id}>{npc.name} - {npc.id}</ListItem>
     })
     let error = this.props.npcs.error;
+    let loading = this.props.npcs.loading ? <Spinning/> : '';
     return (
-      <GrommetApp>
+      <GrommetApp centered={false}>
+        <Header/>
         <Image src={logo} />
         <Headline>Welcome to React with Grommet</Headline>
+        {loading}
         {npcs && 
           <List>{npcs}</List>
         }
-        {error && <div>Error loading NPCS ... </div>}
+        {error && <div>Error loading NPCS ... {error}</div>}
       </GrommetApp>
     );
   }

@@ -27,7 +27,6 @@ export const CONFIG_UPDATE_FAILURE  = "CONFIG_UPDATE_FAILURE";
 export const loadNpcs = () => {
   return dispatch => {
     dispatch({type: NPCS_LOAD});
-
     return api.NPCS.all()
       .then(x => dispatch({type: NPCS_LOAD_SUCCESS, payload: x.data.entities}))
       .catch(error => dispatch({type: NPCS_LOAD_FAILURE, error: error}))
