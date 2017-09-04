@@ -13,13 +13,19 @@ export default class Admin extends React.Component {
           <Menu primary={true}>
             <Anchor href='#'
               className='active'>
-              First
+              NPCS
             </Anchor>
             <Anchor href='#'>
-              Second
+              Players
             </Anchor>
             <Anchor href='#'>
-              Third
+              Items
+            </Anchor>
+            <Anchor href='#'>
+              Rooms
+            </Anchor>
+            <Anchor href='#'>
+              Config
             </Anchor>
           </Menu>
         </Box>

@@ -11,10 +11,35 @@ const req = {
   post: (url, body) => axios.post(u(url), body)
 }
 
-const NPCS = {
+const Npcs = {
   all: () => req.get('/api/admin/npcs')
 }
 
+const Players = {
+  all: () => req.get('/api/admin/players')
+}
+
+const Items = {
+  all: () => req.get('/api/admin/items')
+}
+
+const Rooms = {
+  all: () => req.get('/api/admin/rooms')
+}
+
+const Areas = {
+  all: () => req.get('/api/admin/areas')
+}
+
+const Quests = {
+  all: () => req.get('/api/admin/quests')
+}
+
 export default {
-  NPCS
+  Npcs,
+  Players,
+  Items,
+  Rooms,
+  Areas,
+  Quests
 }

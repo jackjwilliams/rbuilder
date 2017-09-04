@@ -5,7 +5,6 @@ import { Route } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
 
 import { default as GrommetApp } from 'grommet/components/App'
-import { Headline } from 'grommet';
 
 // import App from '../App';
 import Header from '../components/Header';

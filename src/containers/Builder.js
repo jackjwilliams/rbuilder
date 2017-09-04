@@ -13,13 +13,19 @@ export default class Builder extends React.Component {
           <Menu primary={true}>
             <Anchor href='#'
               className='active'>
-              First
+              Bundles
             </Anchor>
             <Anchor href='#'>
-              Second
+              Areas
             </Anchor>
             <Anchor href='#'>
-              Third
+              NPCs
+            </Anchor>
+            <Anchor href='#'>
+              Rooms
+            </Anchor>
+            <Anchor href='#'>
+              Items
             </Anchor>
           </Menu>
         </Box>
