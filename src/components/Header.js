@@ -23,7 +23,7 @@ class Header extends React.Component {
               <Anchor path='/dashboard'>Dashboard
                 {/* <NavLink to='/dashboard' className='grommetux-anchor' activeClassName='grommetux-anchor--active'>Dashboard</NavLink> */}
               </Anchor>
-              <Anchor path='/admin'>Admin
+              <Anchor path='/admin/npcs'>Admin
                 {/* <NavLink to='/admin' className='grommetux-anchor' activeClassName='grommetux-anchor--active'>Admin</NavLink> */}
               </Anchor>
               <Anchor path='/builder'>Builder

@@ -12,27 +12,27 @@ const req = {
 }
 
 const Npcs = {
-  all: () => req.get('/api/admin/npcs')
+  count: () => req.get('/api/admin/npcs/count')
 }
 
 const Players = {
-  all: () => req.get('/api/admin/players')
+  count: () => req.get('/api/admin/players/count')
 }
 
 const Items = {
-  all: () => req.get('/api/admin/items')
+  count: () => req.get('/api/admin/items/count')
 }
 
 const Rooms = {
-  all: () => req.get('/api/admin/rooms')
+  count: () => req.get('/api/admin/rooms/count')
 }
 
 const Areas = {
-  all: () => req.get('/api/admin/areas')
+  count: () => req.get('/api/admin/areas/count')
 }
 
 const Quests = {
-  all: () => req.get('/api/admin/quests')
+  count: () => req.get('/api/admin/quests/count')
 }
 
 export default {

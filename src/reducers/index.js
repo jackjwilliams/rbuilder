@@ -1,4 +1,4 @@
-import dashboard from './dashboard';
+import entities from './entities';
 import ui from './ui';
 
-export { dashboard, ui };
+export { entities, ui };

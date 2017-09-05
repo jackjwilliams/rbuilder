@@ -1,27 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Box, Value, Columns } from 'grommet';
-
+import { Box, Value, Columns, Anchor } from 'grommet';
+import RefreshIcon from 'grommet/components/icons/base/Refresh';
 import * as actions from '../actions';
 
 const mapStateToProps = (state) => ({
   stats: {
-    Items: state.dashboard.items.count,
-    NPCs: state.dashboard.npcs.count,
-    Players: state.dashboard.players.count,
-    Rooms: state.dashboard.rooms.count,
-    Areas: state.dashboard.areas.count,
-    Quests: state.dashboard.quests.count
+    Items: state.entities.items.count,
+    NPCs: state.entities.npcs.count,
+    Players: state.entities.players.count,
+    Rooms: state.entities.rooms.count,
+    Areas: state.entities.areas.count,
+    Quests: state.entities.quests.count
   }
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onLoad: () => {
-    dispatch(actions.loadQuests());
-    dispatch(actions.loadNpcs());
-    dispatch(actions.loadPlayers());
-    dispatch(actions.loadRooms());
-    dispatch(actions.loadAreas());
+  onLoad: (forced) => {
+    dispatch(actions.loadQuests(forced));
+    dispatch(actions.loadItems(forced));
+    dispatch(actions.loadNpcs(forced));
+    dispatch(actions.loadPlayers(forced));
+    dispatch(actions.loadRooms(forced));
+    dispatch(actions.loadAreas(forced));
   }
 });
 
@@ -45,9 +46,19 @@ class Dashboard extends React.Component {
 
   render() {
     return (
-      <Columns size='medium' justify='center'>
-        {this.renderStats()}
-      </Columns>
+      <div>
+        <Columns size='medium' justify='center'>
+          {this.renderStats()}
+          
+        </Columns>
+        <Columns size='medium' justify='center'>
+          <Box align='center' pad='medium' margin='small' colorIndex='light-2'>
+            <Anchor onClick={() => this.props.onLoad(true)}>
+              <RefreshIcon size='xlarge'/>
+            </Anchor>
+          </Box>
+        </Columns>
+      </div>
     )
   }
 }

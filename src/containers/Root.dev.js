@@ -10,6 +10,7 @@ import { default as GrommetApp } from 'grommet/components/App'
 import Header from '../components/Header';
 import Dashboard from './Dashboard';
 import Admin from './Admin';
+import Home from './Home';
 import Builder from './Builder';
 import DevTools from './DevTools';
 
@@ -21,6 +22,7 @@ export default function Root({store, history}) {
           <GrommetApp centered={false}>
             <Header/>
             {/* <Headline>Welcome to React with Grommet</Headline> */}
+            <Route exact path='/' component={Home}/>
             <Route path='/dashboard' component={Dashboard}/>
             <Route path='/admin' component={Admin}/>
             <Route path='/builder' component={Builder}/>

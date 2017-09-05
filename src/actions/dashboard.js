@@ -1,37 +1,37 @@
 import api from '../api';
 import { DASHBOARD_INVALIDATE_SECONDS } from '../constants';
 import { DiffInSeconds } from '../utils';
-export const NPCS_LOAD              = "NPCS_LOAD";
-export const NPCS_LOAD_SUCCESS      = "NPCS_LOAD_SUCESS";
-export const NPCS_LOAD_FAILURE      = "NPCS_LOAD_FAILURE";
+export const NPCS_COUNT_LOAD              = "NPCS_COUNT_LOAD";
+export const NPCS_COUNT_LOAD_SUCCESS      = "NPCS_COUNT_LOAD_SUCCESS";
+export const NPCS_COUNT_LOAD_FAILURE      = "NPCS_COUNT_LOAD_FAILURE";
 
-export const PLAYERS_LOAD           = "PLAYERS_LOAD";
-export const PLAYERS_LOAD_SUCCESS   = "PLAYERS_LOAD_SUCCESS";
-export const PLAYERS_LOAD_FAILURE   = "PLAYERS_LOAD_FAILURE";
+export const PLAYERS_COUNT_LOAD           = "PLAYERS_COUNT_LOAD";
+export const PLAYERS_COUNT_LOAD_SUCCESS   = "PLAYERS_COUNT_LOAD_SUCCESS";
+export const PLAYERS_COUNT_LOAD_FAILURE   = "PLAYERS_COUNT_LOAD_FAILURE";
 
-export const ITEMS_LOAD             = "ITEMS_LOAD";
-export const ITEMS_LOAD_SUCCESS     = "ITEMS_LOAD_SUCCESS";
-export const ITEMS_LOAD_FAILURE     = "ITEMS_LOAD_FAILURE";
+export const ITEMS_COUNT_LOAD             = "ITEMS_COUNT_LOAD";
+export const ITEMS_COUNT_LOAD_SUCCESS     = "ITEMS_COUNT_LOAD_SUCCESS";
+export const ITEMS_COUNT_LOAD_FAILURE     = "ITEMS_COUNT_LOAD_FAILURE";
 
-export const ROOMS_LOAD             = "ROOMS_LOAD";
-export const ROOMS_LOAD_SUCCESS     = "ROOMS_LOAD_SUCCESS";
-export const ROOMS_LOAD_FAILURE     = "ROOMS_LOAD_FAILURE";
+export const ROOMS_COUNT_LOAD             = "ROOMS_COUNT_LOAD";
+export const ROOMS_COUNT_LOAD_SUCCESS     = "ROOMS_COUNT_LOAD_SUCCESS";
+export const ROOMS_COUNT_LOAD_FAILURE     = "ROOMS_COUNT_LOAD_FAILURE";
 
-export const AREAS_LOAD             = "AREAS_LOAD";
-export const AREAS_LOAD_SUCCESS     = "AREAS_LOAD_SUCCESS";
-export const AREAS_LOAD_FAILURE     = "AREAS_LOAD_FAILURE";
+export const AREAS_COUNT_LOAD             = "AREAS_COUNT_LOAD";
+export const AREAS_COUNT_LOAD_SUCCESS     = "AREAS_COUNT_LOAD_SUCCESS";
+export const AREAS_COUNT_LOAD_FAILURE     = "AREAS_COUNT_LOAD_FAILURE";
 
-export const QUESTS_LOAD             = "QUESTS_LOAD";
-export const QUESTS_LOAD_SUCCESS     = "QUESTS_LOAD_SUCCESS";
-export const QUESTS_LOAD_FAILURE     = "QUESTS_LOAD_FAILURE";
+export const QUESTS_COUNT_LOAD            = "QUESTS_COUNT_LOAD";
+export const QUESTS_COUNT_LOAD_SUCCESS    = "QUESTS_COUNT_LOAD_SUCCESS";
+export const QUESTS_COUNT_LOAD_FAILURE    = "QUESTS_COUNT_LOAD_FAILURE";
 
-export const CONFIG_LOAD            = "CONFIG_LOAD";
-export const CONFIG_LOAD_SUCCESS    = "CONFIG_LOAD_SUCCESS";
-export const CONFIG_LOAD_FAILURE    = "CONFIG_LOAD_FAILURE";
+export const CONFIG_LOAD                  = "CONFIG_LOAD";
+export const CONFIG_LOAD_SUCCESS          = "CONFIG_LOAD_SUCCESS";
+export const CONFIG_LOAD_FAILURE          = "CONFIG_LOAD_FAILURE";
 
-export const CONFIG_UPDATE          = "CONFIG_UPDATE";
-export const CONFIG_UPDATE_SUCCESS  = "CONFIG_UPDATE_SUCCESS";
-export const CONFIG_UPDATE_FAILURE  = "CONFIG_UPDATE_FAILURE";
+export const CONFIG_UPDATE                = "CONFIG_UPDATE";
+export const CONFIG_UPDATE_SUCCESS        = "CONFIG_UPDATE_SUCCESS";
+export const CONFIG_UPDATE_FAILURE        = "CONFIG_UPDATE_FAILURE";
 
 const shouldUpdate = (lastRetrieved) => {
   let now = Date.now();
@@ -42,76 +42,76 @@ const shouldUpdate = (lastRetrieved) => {
   return shouldUpdate;
 }
 
-export const loadQuests = () => {
+export const loadQuests = (forced) => {
   return (dispatch, getState) => {
-    const { lastRetrieved } = getState().dashboard.quests;
-    if (shouldUpdate(lastRetrieved)) {
-      dispatch({type: QUESTS_LOAD});
-      return api.Quests.all()
-        .then(x => dispatch({type: QUESTS_LOAD_SUCCESS, payload: x.data.quests, lastRetrieved: Date.now()}))
-        .catch(error => dispatch({type: QUESTS_LOAD_FAILURE, error: error}))
+    const { lastRetrieved } = getState().entities.quests;
+    if (shouldUpdate(lastRetrieved) || forced) {
+      dispatch({type: QUESTS_COUNT_LOAD});
+      return api.Quests.count()
+        .then(x => dispatch({type: QUESTS_COUNT_LOAD_SUCCESS, payload: x.data.count, lastRetrieved: Date.now()}))
+        .catch(error => dispatch({type: QUESTS_COUNT_LOAD_FAILURE, error: error}))
     }
   }
 }
 
-export const loadNpcs = () => {
+export const loadNpcs = (forced) => {
   return (dispatch, getState) => {
-    const { lastRetrieved } = getState().dashboard.npcs;
-    if (shouldUpdate(lastRetrieved)) {
-      dispatch({type: NPCS_LOAD});
-      return api.Npcs.all()
-        .then(x => dispatch({type: NPCS_LOAD_SUCCESS, payload: x.data.entities, lastRetrieved: Date.now()}))
-        .catch(error => dispatch({type: NPCS_LOAD_FAILURE, error: error}))
+    const { lastRetrieved } = getState().entities.npcs;
+    if (shouldUpdate(lastRetrieved) || forced) {
+      dispatch({type: NPCS_COUNT_LOAD});
+      return api.Npcs.count()
+        .then(x => dispatch({type: NPCS_COUNT_LOAD_SUCCESS, payload: x.data.count, lastRetrieved: Date.now()}))
+        .catch(error => dispatch({type: NPCS_COUNT_LOAD_FAILURE, error: error}))
     }
   }
 }
 
-export const loadPlayers = () => {
+export const loadPlayers = (forced) => {
   return (dispatch, getState) => {
-    const { lastRetrieved } = getState().dashboard.players;
-    if (shouldUpdate(lastRetrieved)) {
-      dispatch({type: PLAYERS_LOAD});
-      return api.Players.all()
-        .then(x =>dispatch({type: PLAYERS_LOAD_SUCCESS, payload: x.data.players, lastRetrieved: Date.now()}))
-        .catch(error => dispatch({type: PLAYERS_LOAD_FAILURE, error: error}))
-    }
-    
-  }
-}
-
-export const loadItems = () => {
-  return (dispatch, getState) => {
-    const { lastRetrieved } = getState().dashboard.items;
-    if (shouldUpdate(lastRetrieved)) {
-      dispatch({type: ITEMS_LOAD});
-      return api.Items.all()
-        .then(x => dispatch({type: ITEMS_LOAD_SUCCESS, payload: x.data.items, lastRetrieved: Date.now()}))
-        .catch(error => dispatch({type: ITEMS_LOAD_FAILURE, error: error}))
+    const { lastRetrieved } = getState().entities.players;
+    if (shouldUpdate(lastRetrieved) || forced) {
+      dispatch({type: PLAYERS_COUNT_LOAD});
+      return api.Players.count()
+        .then(x =>dispatch({type: PLAYERS_COUNT_LOAD_SUCCESS, payload: x.data.count, lastRetrieved: Date.now()}))
+        .catch(error => dispatch({type: PLAYERS_COUNT_LOAD_FAILURE, error: error}))
     }
     
   }
 }
 
-export const loadRooms = () => {
+export const loadItems = (forced) => {
   return (dispatch, getState) => {
-    const { lastRetrieved } = getState().dashboard.rooms;
-    if (shouldUpdate(lastRetrieved)) { 
-      dispatch({type: ROOMS_LOAD});
-      return api.Rooms.all()
-        .then(x => dispatch({type: ROOMS_LOAD_SUCCESS, payload: x.data.rooms, lastRetrieved: Date.now()}))
-        .catch(error => dispatch({type: ROOMS_LOAD_FAILURE, error: error}))
+    const { lastRetrieved } = getState().entities.items;
+    if (shouldUpdate(lastRetrieved) || forced) {
+      dispatch({type: ITEMS_COUNT_LOAD});
+      return api.Items.count()
+        .then(x => dispatch({type: ITEMS_COUNT_LOAD_SUCCESS, payload: x.data.count, lastRetrieved: Date.now()}))
+        .catch(error => dispatch({type: ITEMS_COUNT_LOAD_FAILURE, error: error}))
+    }
+    
+  }
+}
+
+export const loadRooms = (forced) => {
+  return (dispatch, getState) => {
+    const { lastRetrieved } = getState().entities.rooms;
+    if (shouldUpdate(lastRetrieved) || forced) { 
+      dispatch({type: ROOMS_COUNT_LOAD});
+      return api.Rooms.count()
+        .then(x => dispatch({type: ROOMS_COUNT_LOAD_SUCCESS, payload: x.data.count, lastRetrieved: Date.now()}))
+        .catch(error => dispatch({type: ROOMS_COUNT_LOAD_FAILURE, error: error}))
     }
   }
 }
 
-export const loadAreas = () => {
+export const loadAreas = (forced) => {
   return (dispatch, getState) => {
-    const { lastRetrieved } = getState().dashboard.areas;
-    if (shouldUpdate(lastRetrieved)) {
-      dispatch({type: AREAS_LOAD});
-      return api.Areas.all()
-        .then(x => dispatch({type: AREAS_LOAD_SUCCESS, payload: x.data.areas, lastRetrieved: Date.now()}))
-        .catch(error => dispatch({type: AREAS_LOAD_FAILURE, error: error}))
+    const { lastRetrieved } = getState().entities.areas;
+    if (shouldUpdate(lastRetrieved) || forced) {
+      dispatch({type: AREAS_COUNT_LOAD});
+      return api.Areas.count()
+        .then(x => dispatch({type: AREAS_COUNT_LOAD_SUCCESS, payload: x.data.count, lastRetrieved: Date.now()}))
+        .catch(error => dispatch({type: AREAS_COUNT_LOAD_FAILURE, error: error}))
     }
   }
 }

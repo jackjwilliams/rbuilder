@@ -51,83 +51,60 @@ const initalState = {
   }
 }
 
-const dashboard = (state = initalState, action) => {
+const entities = (state = initalState, action) => {
   switch (action.type) {
-    case a.ITEMS_LOAD_SUCCESS:
+    case a.ITEMS_COUNT_LOAD_SUCCESS:
       return {
         ...state,
         items: {
           ...state.items,
-          list: action.payload,
-          count: action.payload.length,
+          count: action.payload,
           lastRetrieved: action.lastRetrieved
         }
       }
-    case a.PLAYERS_LOAD_SUCCESS:
+    case a.PLAYERS_COUNT_LOAD_SUCCESS:
       return {
         ...state,
         players: {
           ...state.players,
-          list: action.payload,
-          count: action.payload.length,
+          count: action.payload,
           lastRetrieved: action.lastRetrieved
         }
       }
-    case a.NPCS_LOAD_SUCCESS:
+    case a.NPCS_COUNT_LOAD_SUCCESS:
       return {
         ...state,
         npcs: {
           ...state.npcs,
-          list: action.payload,
-          count: action.payload.length,
+          count: action.payload,
           lastRetrieved: action.lastRetrieved
         }
       }
-    case a.ROOMS_LOAD_SUCCESS:
+    case a.ROOMS_COUNT_LOAD_SUCCESS:
       return {
         ...state,
         rooms: {
           ...state.rooms,
-          list: action.payload,
-          count: action.payload.length,
+          count: action.payload,
           lastRetrieved: action.lastRetrieved
         }
       }
-    case a.AREAS_LOAD_SUCCESS:
+    case a.AREAS_COUNT_LOAD_SUCCESS:
       return {
         ...state,
         areas: {
           ...state.areas,
-          list: action.payload,
-          count: action.payload.length,
+          count: action.payload,
           lastRetrieved: action.lastRetrieved
         }
       }
-    case a.QUESTS_LOAD_SUCCESS:
+    case a.QUESTS_COUNT_LOAD_SUCCESS:
       return {
         ...state,
         quests: {
           ...state.quests,
-          list: action.payload,
-          count: action.payload.length,
+          count: action.payload,
           lastRetrieved: action.lastRetrieved
-        }
-      }
-    case a.NPCS_LOAD_FAILURE: 
-      return {
-        ...state,
-        npcs: {
-          ...state.npcs,
-          error: action.error.message,
-          loading: false
-        }
-      }
-    case a.NPCS_LOAD:
-      return {
-        ...state,
-        npcs: {
-          ...state.npcs,
-          loading: true
         }
       }
     default:
@@ -135,4 +112,4 @@ const dashboard = (state = initalState, action) => {
   }
 }
 
-export default dashboard;
+export default entities;
