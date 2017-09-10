@@ -1,5 +1,3 @@
-import * as a from '../actions';
-
 const initialState = {
   fetching: 0,
   errors: []

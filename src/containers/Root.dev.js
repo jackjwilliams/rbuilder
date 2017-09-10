@@ -7,7 +7,7 @@ import { ConnectedRouter } from 'react-router-redux';
 import { default as GrommetApp } from 'grommet/components/App'
 
 // import App from '../App';
-import Header from '../components/Header';
+import TopNavigation from '../components/TopNavigation';
 import Dashboard from './Dashboard';
 import Admin from './Admin';
 import Home from './Home';
@@ -20,14 +20,12 @@ export default function Root({store, history}) {
       <div>
         <ConnectedRouter history={history}>
           <GrommetApp centered={false}>
-            <Header/>
-            {/* <Headline>Welcome to React with Grommet</Headline> */}
+            <TopNavigation/>
             <Route exact path='/' component={Home}/>
             <Route path='/dashboard' component={Dashboard}/>
             <Route path='/admin' component={Admin}/>
             <Route path='/builder' component={Builder}/>
           </GrommetApp>
-          
         </ConnectedRouter>
         <DevTools/>
       </div>

@@ -1,9 +1,14 @@
 import api from '../api';
 import { DASHBOARD_INVALIDATE_SECONDS } from '../constants';
 import { DiffInSeconds } from '../utils';
+
 export const NPCS_COUNT_LOAD              = "NPCS_COUNT_LOAD";
 export const NPCS_COUNT_LOAD_SUCCESS      = "NPCS_COUNT_LOAD_SUCCESS";
 export const NPCS_COUNT_LOAD_FAILURE      = "NPCS_COUNT_LOAD_FAILURE";
+
+export const LIVE_PLAYERS_COUNT_LOAD           = "LIVE_PLAYERS_COUNT_LOAD";
+export const LIVE_PLAYERS_COUNT_LOAD_SUCCESS   = "LIVE_PLAYERS_COUNT_LOAD_SUCCESS";
+export const LIVE_PLAYERS_COUNT_LOAD_FAILURE   = "LIVE_PLAYERS_COUNT_LOAD_FAILURE";
 
 export const PLAYERS_COUNT_LOAD           = "PLAYERS_COUNT_LOAD";
 export const PLAYERS_COUNT_LOAD_SUCCESS   = "PLAYERS_COUNT_LOAD_SUCCESS";
@@ -37,8 +42,6 @@ const shouldUpdate = (lastRetrieved) => {
   let now = Date.now();
   let diff = DiffInSeconds(lastRetrieved, now, DASHBOARD_INVALIDATE_SECONDS);
   let shouldUpdate = diff >= DASHBOARD_INVALIDATE_SECONDS;
-  console.log(diff);
-  console.log(shouldUpdate);
   return shouldUpdate;
 }
 
@@ -66,12 +69,25 @@ export const loadNpcs = (forced) => {
   }
 }
 
+export const loadLivePlayers = (forced) => {
+  return (dispatch, getState) => {
+    const { lastRetrieved } = getState().entities.players;
+    if (shouldUpdate(lastRetrieved) || forced) {
+      dispatch({type: LIVE_PLAYERS_COUNT_LOAD});
+      return api.Players.count()
+        .then(x =>dispatch({type: LIVE_PLAYERS_COUNT_LOAD_SUCCESS, payload: x.data.count, lastRetrieved: Date.now()}))
+        .catch(error => dispatch({type: LIVE_PLAYERS_COUNT_LOAD_FAILURE, error: error}))
+    }
+    
+  }
+}
+
 export const loadPlayers = (forced) => {
   return (dispatch, getState) => {
     const { lastRetrieved } = getState().entities.players;
     if (shouldUpdate(lastRetrieved) || forced) {
       dispatch({type: PLAYERS_COUNT_LOAD});
-      return api.Players.count()
+      return api.Data.count('player')
         .then(x =>dispatch({type: PLAYERS_COUNT_LOAD_SUCCESS, payload: x.data.count, lastRetrieved: Date.now()}))
         .catch(error => dispatch({type: PLAYERS_COUNT_LOAD_FAILURE, error: error}))
     }

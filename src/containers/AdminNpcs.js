@@ -1,17 +1,10 @@
 import React from 'react';
-import {
-  Title,
-  Header,
-  Sidebar,
-  Box,
-  Menu,
-  Anchor,
-  Footer,
-  Button,
-  Split,
-  Columns,
-  Search
-} from 'grommet';
+
+import Search from 'grommet/components/Search';
+import Header from 'grommet/components/Header';
+import Title from 'grommet/components/Title';
+import Box from 'grommet/components/Box';
+import Columns from 'grommet/components/Columns';
 
 export default AdminNpcs => {
   return (

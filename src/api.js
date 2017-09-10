@@ -35,11 +35,16 @@ const Quests = {
   count: () => req.get('/api/admin/quests/count')
 }
 
+const Data = {
+  count: (type) => req.get(`/api/admin/data/count?type=${type}`)
+}
+
 export default {
   Npcs,
   Players,
   Items,
   Rooms,
   Areas,
-  Quests
+  Quests,
+  Data
 }

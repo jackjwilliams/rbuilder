@@ -12,7 +12,8 @@ const initalState = {
   },
   players: {
     list: [],
-    count: 0,
+    countLive: 0,
+    countAll: 0,
     page: 1,
     filter: "",
     lastRetrieved: undefined
@@ -62,12 +63,21 @@ const entities = (state = initalState, action) => {
           lastRetrieved: action.lastRetrieved
         }
       }
+    case a.LIVE_PLAYERS_COUNT_LOAD_SUCCESS:
+      return {
+        ...state,
+        players: {
+          ...state.players,
+          countLive: action.payload,
+          lastRetrieved: action.lastRetrieved
+        }
+      }
     case a.PLAYERS_COUNT_LOAD_SUCCESS:
       return {
         ...state,
         players: {
           ...state.players,
-          count: action.payload,
+          countAll: action.payload,
           lastRetrieved: action.lastRetrieved
         }
       }

@@ -3,7 +3,8 @@ import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import { routerMiddleware, routerReducer } from 'react-router-redux';
 import thunk from 'redux-thunk';
 
-import { entities, ui } from '../reducers';
+import socketMiddleware from '../socketMiddleware';
+import { entities, ui, admin } from '../reducers';
 import DevTools from '../containers/DevTools';
 
 const composeEnhancers = compose;
@@ -14,10 +15,10 @@ const middleware = routerMiddleware(history);
 
 export function configureStore(initialState) {
   return createStore(
-          combineReducers({entities, ui, router: routerReducer}), 
+          combineReducers({entities, ui, admin, router: routerReducer}), 
           initialState,
           composeEnhancers(
-            applyMiddleware(middleware, thunk),
+            applyMiddleware(middleware, thunk, socketMiddleware),
             DevTools.instrument()
           )
   );
