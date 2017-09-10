@@ -6,6 +6,7 @@ import Box from 'grommet/components/Box';
 
 import AdminNpcs from './AdminNpcs';
 import AdminLogs from './AdminLogs';
+import AdminConfig from './AdminConfig';
 import AdminSidebar from '../components/AdminSidebar';
 
 export default class Admin extends React.Component {
@@ -19,6 +20,7 @@ export default class Admin extends React.Component {
           </Route> */}
           <Route path='/admin/npcs' component={AdminNpcs} />
           <Route path='/admin/logs' component={AdminLogs} />
+          <Route path='/admin/config' component={AdminConfig} />
         </Box>
       </Split>
     )

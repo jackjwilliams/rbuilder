@@ -39,6 +39,11 @@ const Data = {
   count: (type) => req.get(`/api/admin/data/count?type=${type}`)
 }
 
+const Config = {
+  get: () => req.get('/api/admin/config'),
+  save: (config) => req.put('/api/admin/config', config)
+}
+
 export default {
   Npcs,
   Players,
@@ -46,5 +51,6 @@ export default {
   Rooms,
   Areas,
   Quests,
-  Data
+  Data,
+  Config
 }

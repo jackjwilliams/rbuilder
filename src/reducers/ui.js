@@ -4,10 +4,11 @@ const initialState = {
 }
 
 const ui = (state = initialState, action) => {
+  const isSave = action.type.endsWith('_SAVE');
   const isLoad = action.type.endsWith('_LOAD');
   const isSuccess = action.type.endsWith('_SUCCESS');
   const isFailure = action.type.endsWith('_FAILURE');
-  if (isLoad) {
+  if (isLoad || isSave) {
     return {
       ...state,
       fetching: state.fetching + 1

@@ -30,14 +30,6 @@ export const QUESTS_COUNT_LOAD            = "QUESTS_COUNT_LOAD";
 export const QUESTS_COUNT_LOAD_SUCCESS    = "QUESTS_COUNT_LOAD_SUCCESS";
 export const QUESTS_COUNT_LOAD_FAILURE    = "QUESTS_COUNT_LOAD_FAILURE";
 
-export const CONFIG_LOAD                  = "CONFIG_LOAD";
-export const CONFIG_LOAD_SUCCESS          = "CONFIG_LOAD_SUCCESS";
-export const CONFIG_LOAD_FAILURE          = "CONFIG_LOAD_FAILURE";
-
-export const CONFIG_UPDATE                = "CONFIG_UPDATE";
-export const CONFIG_UPDATE_SUCCESS        = "CONFIG_UPDATE_SUCCESS";
-export const CONFIG_UPDATE_FAILURE        = "CONFIG_UPDATE_FAILURE";
-
 const shouldUpdate = (lastRetrieved) => {
   let now = Date.now();
   let diff = DiffInSeconds(lastRetrieved, now, DASHBOARD_INVALIDATE_SECONDS);

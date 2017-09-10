@@ -27,7 +27,7 @@ const AdminSidebar = () => (
         <Anchor href='#'>
           Rooms
         </Anchor>
-        <Anchor href='#'>
+        <Anchor path='/admin/config'>
           Config
         </Anchor>
         <Anchor path='/admin/logs'>
